@@ -52,7 +52,7 @@ export default class MyCarousel extends React.Component {
     _renderItem({item,index}){
         return (
           <View style={{
-              backgroundColor:'floralwhite',
+              backgroundColor:'#000',
               borderRadius: 5,
               height: 250,
               padding: 10,
@@ -72,7 +72,7 @@ export default class MyCarousel extends React.Component {
 
     render() {
         return (
-          <SafeAreaView style={{flex: 1, backgroundColor:'rebeccapurple', paddingTop: 150, }}>
+          <SafeAreaView style={{flex: 1, backgroundColor:'#000', paddingTop: 150, }}>
             <View style={{ flex: 1, flexDirection:'row', justifyContent: 'center', color:'black'}}>
                 <Carousel
                   layout={"stack"}

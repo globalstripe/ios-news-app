@@ -37,10 +37,10 @@ const App = ({ navigation }) => {
       <SafeAreaView style={styles.container}>
 
 
-        <Text>TOP HERE - FOLLOWED BY NATIVE VIDEO</Text>
-        <Text>OKEY DOKEY</Text>
+        <Text style={styles.text}>TOP HERE - FOLLOWED BY NATIVE VIDEO</Text>
+        <Text style={styles.text}>OKEY DOKEY</Text>
 
-        <Text>Carousel</Text>
+        <Text style={styles.text}>Carousel</Text>
 
         <ScrollView>
 
@@ -48,37 +48,18 @@ const App = ({ navigation }) => {
 
           <View style={{flex: 1,}}>
    
- 
-        <NativeAdView style={{width: "95%",alignSelf: "center",height: 100,}}
-        adUnitID="ca-app-pub-2524089956888163/9288094240">
 
-        <View style={{height: 100, width: "100%",}}>
-         
-          <AdBadge/>
-          <View style={{height: 100,width: "100%",flexDirection: "row",
-              justifyContent: "flex-start",alignItems: "center",paddingHorizontal: 10,}} >
+      <Row title="Netflix Originals" fetchUrl={requests.fetchNetFlixOriginals} />
+      <Row title="Trending Now" fetchUrl={requests.fetchTrendingNow}/>
+      <Row title="Top Rated" fetchUrl={requests.fetchTopRated}/>
+      <Row title="Action Movies" fetchUrl={requests.fetchActionMovies}/>
+      <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies}/>
+      <Row title="Horror Movies" fetchUrl={requests.fetchHorroMovies}/>
+      <Row title="Romantic Movies" fetchUrl={requests.fetchRomanceMovies}/>
+      <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries}/>
 
-           <IconView style={{ width: 60, height: 60, }} />
-            <View style={{width: "65%",maxWidth: "65%", paddingHorizontal: 6,}} >
-                <HeadlineView style={{ fontWeight: "bold", fontSize: 13,}} />
-                <TaglineView numberOfLines={5} style={{ fontSize: 11, }} />
-                <AdvertiserView style={{fontSize: 10, color: "gray",}}/>
-            </View>
- 
-            <CallToActionView style={{height: 45,paddingHorizontal: 12,
-                backgroundColor: "purple",justifyContent: "center",
-                alignItems: "center",borderRadius: 5,elevation: 10,}} 
-                textStyle={{ color: "white", fontSize: 14 }} />
-          </View>
-        </View>
-      </NativeAdView>
-   
       <GlobalStripeAds></GlobalStripeAds>
       <MyAds></MyAds>
-      <GlobalStripeAds></GlobalStripeAds>
-      <MyAds></MyAds>
-      
-      <Row title="NetFlix Movies" fetchUrl={requests.fetchNetFlixOriginals}></Row>
 
 
     </View>
@@ -95,12 +76,16 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
   },
   safestyle: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  text: {
+    backgroundColor: '#000',
+    color: '#fff'
   },
 });
