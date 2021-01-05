@@ -55,9 +55,9 @@ export default class MyCarousel extends React.Component {
               backgroundColor:'#000',
               borderRadius: 5,
               height: 250,
-              padding: 10,
+              padding: 5,
               marginTop: 1,
-              marginLeft: 25,
+              marginLeft: 15,
               marginRight: 25, }}>
 
             <Text>{item.title}</Text>
@@ -78,7 +78,7 @@ export default class MyCarousel extends React.Component {
                   layout={"stack"}
                   ref={ref => this.carousel = ref}
                   data={this.state.carouselItems}
-                  height={150}
+                  height={398}
                   sliderWidth={300}
                   itemWidth={390}
                   renderItem={this._renderItem}
@@ -108,8 +108,8 @@ const styles = StyleSheet.create({
       height: 50,
     },
     logo: {
-      width: 96,
-      height: 98,
+      width: 396,
+      height: 398,
     },
   });
   
