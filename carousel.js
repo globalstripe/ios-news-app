@@ -2,6 +2,8 @@ import * as React from 'react';
 import {
   StyleSheet,
   Text, 
+  TouchableOpacity,
+  TouchableHighlight,
   View,
   Image,
   SafeAreaView } from 'react-native';
@@ -51,19 +53,27 @@ export default class MyCarousel extends React.Component {
 
     _renderItem({item,index}){
         return (
+          
           <View style={{
               backgroundColor:'#000',
               borderRadius: 5,
-              height: 250,
+              height: 100,
               padding: 5,
               marginTop: 1,
               marginLeft: 15,
               marginRight: 25, }}>
 
             <Text>{item.title}</Text>
+            <TouchableHighlight
+                    activeOpacity={0.6}
+                    underlayColor="#000000"
+                    onPress={() => alert(item.title)}>
+    
             <Image style={styles.logo}
              source={{uri: item.src}}
             />
+
+             </TouchableHighlight>
            <Text>{item.text}</Text>
           </View>
 
@@ -78,9 +88,9 @@ export default class MyCarousel extends React.Component {
                   layout={"stack"}
                   ref={ref => this.carousel = ref}
                   data={this.state.carouselItems}
-                  height={398}
-                  sliderWidth={300}
-                  itemWidth={390}
+                  height={300}
+                  sliderWidth={390}
+                  itemWidth={360}
                   renderItem={this._renderItem}
                   onSnapToItem = { index => this.setState({activeIndex:index}) }
                   autoplay={true}

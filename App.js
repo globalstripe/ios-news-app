@@ -1,91 +1,97 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import {ScrollView, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+// In App.js in a new project
 
-import NativeAdView, {AdManager, CallToActionView,IconView,HeadlineView,TaglineView, 
-                       AdvertiserView,AdBadge,} 
-from "react-native-admob-native-ads";
+import * as React from 'react';
+import { Button, StyleSheet, View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Landing from './Landing'
+import DetailsScreen from './Details'
+import WebView from 'react-native-webview'
 
-import {MyAds, GlobalStripeAds} from './Admodule'
-import MyCarousel from './carousel'
-
-import Row from './row'
-import requests from './requests.js'
-
-const App = ({ navigation }) => {
-
-  const onFailToRecieveAd = (error) => console.log(error);
-  const myAdUinitID = 'ca-app-pub-2524089956888163/9288094240';
-  const myNativeAd = 'ca-app-pub-2524089956888163/9298335557';
-  const GoogleTestAdUnit = 'ca-app-pub-3940256099942544/2934735716';
-  const anotherTestAdUnit = 'ca-app-pub-3940256099942544/2247696110'
-
-  const config = {
-    //testDeviceIds: ["YOUR_TEST_DEVICE_ID"],
-    maxAdContetRating: "MA",
-    tagForChildDirectedTreatment: false,
-    tagForUnderAgeConsent: false,
-  };
-  
-  AdManager.setRequestConfiguration(config);
-
-  AdManager.isTestDevice().then((result) => console.log("Is Test Device?", result));
-  
-  return (
-    <>
-
-      <SafeAreaView style={styles.container}>
+function HomeScreen({ navigation }) {
+    return (
+        
+      <View style={{ flex: 1 }}>
+        <WebView
+                    style={ styles.WebViewContainer }
+                    //javaScriptEnabled={true}
+                    //domStorageEnabled={true}
+                    source={{uri: 'https://netflix-clone-5b9eb.web.app/' }}
+        />
+      </View>
+    );
+  }
 
 
-        <Text style={styles.text}>TOP HERE - FOLLOWED BY NATIVE VIDEO</Text>
-        <Text style={styles.text}>OKEY DOKEY</Text>
+  const Stack = createStackNavigator();
 
-        <Text style={styles.text}>Carousel</Text>
-
-        <ScrollView>
-
-        <MyCarousel></MyCarousel>
-
-          <View style={{flex: 1,}}>
-   
-
-      <Row title="Netflix Originals" fetchUrl={requests.fetchNetFlixOriginals} />
-      <Row title="Trending Now" fetchUrl={requests.fetchTrendingNow}/>
-      <Row title="Top Rated" fetchUrl={requests.fetchTopRated}/>
-      <Row title="Action Movies" fetchUrl={requests.fetchActionMovies}/>
-      <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies}/>
-      <Row title="Horror Movies" fetchUrl={requests.fetchHorroMovies}/>
-      <Row title="Romantic Movies" fetchUrl={requests.fetchRomanceMovies}/>
-      <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries}/>
-
-      <GlobalStripeAds></GlobalStripeAds>
-      <MyAds></MyAds>
-
-
-    </View>
-
-    </ScrollView>
-
-    </SafeAreaView>
-    </>
-  );
-};
+  function App() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Landing">
+          <Stack.Screen name="Home" component={HomeScreen}/>
+          <Stack.Screen name="Landing" component={Landing}/>
+          <Stack.Screen name="Details" component={DetailsScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 
 export default App;
 
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  safestyle: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  text: {
-    backgroundColor: '#000',
-    color: '#fff'
-  },
-});
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+    },
+    WebViewContainer: {
+       marginTop: (Platform.OS == 'android') ? 20 : 0,
+    },
+    safestyle: {
+      flex: 1,
+      backgroundColor: '#fff',
+    },
+    button2: {
+        fontFamily: 'Verdana-Bold',
+        position: 'absolute',
+        fontSize: 36,
+        marginLeft: 10,
+        padding: 0,
+        marginTop: 525,
+        marginBottom: 15,
+        color: 'white',
+        zIndex: 2 
+    },
+    poster: {
+        backgroundColor: '#000',
+        flex: 1,
+        marginLeft: 1,
+        zIndex: 1
+      },
+    tinyLogo: {
+        width: 50,
+        height: 50,
+      },
+   logo: {
+        marginLeft: 1,
+        width: 196,
+        height: 98,
+      },
+    title: {
+        //fontFamily: 'Roboto-Black',  <-- External font 
+        // List of all internal ios fonts for react-native  
+        // https://github.com/react-native-training/react-native-fonts/blob/master/IosFonts.js
+        position: 'absolute',
+        fontFamily: 'Verdana-Bold',
+        fontSize: 36,
+        marginLeft: 10,
+        padding: 0,
+        marginTop: 25,
+        marginBottom: 15,
+        color: 'white',
+        zIndex: 2 
+    }
+  });
+
+

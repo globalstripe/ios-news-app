@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from 'react'
-import {ScrollView, SafeAreaView, StyleSheet, Image, Text, View } from 'react-native';
+import {TouchableOpacity,TouchableHighlight, ScrollView, SafeAreaView, StyleSheet, Image, Text, View } from 'react-native';
 import axios from './axios';
 
 const base_url = "https://image.tmdb.org/t/p/original"
 
-function Row({title, fetchUrl}) {
+
+function Row({title, fetchUrl, nav }) {
     
     const [movies, setMovies] = useState([]);
+    
 
     // A snippet of code that runs under a specific conditional variable
     useEffect(() => {
@@ -28,10 +30,10 @@ function Row({title, fetchUrl}) {
     //console.table(movies)
 
     return (
+       
         <View style={styles.row}>
 
-            <Text>{title}</Text>
-
+            <Text style={styles.title}>{title}</Text>
            
             <ScrollView horizontal={true}>
 
@@ -39,16 +41,31 @@ function Row({title, fetchUrl}) {
             
                 <View key={movie.id} style={styles.row}>
                 {/* <Text>Movie Title {movie.title}</Text> */}
+
+                <TouchableHighlight
+                    activeOpacity={0.6}
+                    underlayColor="#000000"
+                    onPress={() => {
+                        nav.navigate('Details', {
+                        movie
+                        })
+                    }}
+                >
+    
                 <Image 
-                style={styles.logo}
-                source={{uri: base_url+movie.backdrop_path}}
+                    style={styles.logo}
+                    source={{uri: base_url+movie.backdrop_path}}
                 />
+       
+                </TouchableHighlight>
+
                 </View>
                  
                 ))}
         
             </ScrollView>
         </View>
+        
     )
 }
 
@@ -70,9 +87,24 @@ const styles = StyleSheet.create({
         height: 50,
       },
    logo: {
-        width: 96,
+        marginLeft: 1,
+        width: 196,
         height: 98,
       },
+    title: {
+        //fontFamily: 'Roboto-Black',  <-- External font 
+        // List of all internal ios fonts for react-native  
+        // https://github.com/react-native-training/react-native-fonts/blob/master/IosFonts.js
+
+        fontFamily: 'Verdana-Bold',
+        fontSize: 20,
+        backgroundColor: '#000',
+        marginLeft: 1,
+        padding: 0,
+        marginTop: 15,
+        marginBottom: 15,
+        color: '#fff',
+    },
     row: {
         marginLeft: 20,
         color: '#fff',
