@@ -1,10 +1,11 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import { Button, StyleSheet, View, Text } from 'react-native';
+import { TouchableOpacity, Button, StyleSheet, View, Image, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Landing from './Landing'
+import API from './data-api'
 import DetailsScreen from './Details'
 import WebView from 'react-native-webview'
 
@@ -22,6 +23,19 @@ function HomeScreen({ navigation }) {
     );
   }
 
+  function HeaderTitle() {
+    return (
+
+      <Image
+      style={{ marginTop: 10, width: 420, height: 130 }}
+      source={require('./assets/images/ChrisFlix3.png')}
+      ></Image>
+
+      // style={{ width: 50, height: 50 }}
+
+    );
+  }
+
 
   const Stack = createStackNavigator();
 
@@ -29,9 +43,37 @@ function HomeScreen({ navigation }) {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Landing">
-          <Stack.Screen name="Home" component={HomeScreen}/>
-          <Stack.Screen name="Landing" component={Landing}/>
-          <Stack.Screen name="Details" component={DetailsScreen} />
+          <Stack.Screen 
+          name="Home" 
+          component={HomeScreen}
+          options={{ title: 'WebView' }}
+          />
+        
+          <Stack.Screen 
+          name="Landing" 
+          component={Landing}
+          options={{ title: 'ChrisFlix',
+          headerTitle: props => <HeaderTitle {...props} />,
+          headerStyle: { backgroundColor: '#000'},
+          headerTintColor: '#fff',
+          headerTitleStyle: {fontWeight: 'bold'}
+        }}
+          />
+          <Stack.Screen 
+          name="Details" 
+          component={DetailsScreen} 
+          options={{ title: 'Details',
+          headerStyle: { backgroundColor: '#000'},
+          headerTintColor: '#fff',
+          headerTitleStyle: {fontWeight: 'bold'}
+          //headerTitle: props => <HeaderTitle {...props} />,
+         }}
+          />
+          <Stack.Screen 
+          name="API" 
+          component={API} 
+          options={{ title: 'API DATA' }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );

@@ -12,6 +12,7 @@ import {ScrollView, Dimensions, NativeModules, SafeAreaView, StyleSheet, Image, 
 import MyCarousel from './carousel'
 
 import Row from './row'
+import YouTubeAPI from './data-api'
 import requests from './requests.js'
 
 var deviceWidth = Dimensions.get("window").width;
@@ -52,11 +53,6 @@ const Landing = ({ navigation }) => {
         <Text style={styles.text}>Carousel</Text>
        */}
 
-       <Image
-       style={styles.header_logo}
-       source={require('./assets/images/ChrisFlix2.png')}
-       ></Image>
-
       <ScrollView>
       <MyCarousel></MyCarousel>
       <View style={{flex: 1,}}>
@@ -78,9 +74,13 @@ const Landing = ({ navigation }) => {
 
     </ScrollView>
         <Button
-        title="Go to Home"
+        title="Home"
         onPress={() => navigation.navigate('Home')}
-      />
+        />
+        <Button
+        title="API DATA"
+        onPress={() => navigation.navigate('API')}
+        />
     </SafeAreaView>
 
   );

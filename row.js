@@ -54,7 +54,9 @@ function Row({title, fetchUrl, nav }) {
     
                 <Image 
                     style={styles.logo}
-                    source={{uri: base_url+movie.backdrop_path}}
+                    source={{uri: base_url+movie.backdrop_path,
+                    //cache: 'only-if-cached'}}
+                    cache: 'force-cache'}}
                 />
        
                 </TouchableHighlight>

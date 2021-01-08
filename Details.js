@@ -8,27 +8,27 @@ const base_url = "https://image.tmdb.org/t/p/original"
 
 function DetailsScreen({route, navigation}) {
 
-    //console.log('Entered DetailsScreen')
-    //console.log('Setting base_url: ' + base_url)
+    console.log('Entered DetailsScreen')
+    console.log('Setting base_url: ' + base_url)
 
     const [trailerUrl, setTrailerUrl] = useState('https://www.youtube.com/watch?v=sfM7_JLk-84&autoplay=0');
     
     const { movie } = route.params;
 
-    //console.log('Getting Movie Object')
+    console.log('Getting Movie Object')
 
     movieTrailer(movie?.title || "TopGun")
     .then((url) => {
-        //console.log('Getting YouTube Trailer for: ' + movie.title)
-        //console.log('MovieTrailer URL: ', url)
-        //console.log("Setting Trailer URL")
+        console.log('Getting YouTube Trailer for: ' + movie.title)
+        console.log('MovieTrailer URL: ', url)
+        console.log("Setting Trailer URL")
 
         setTrailerUrl(url)
         // console.log("Done")
 
-        //const urlParams = new URLSearchParams(new URL(url).search)
-        //console.log("URL Params: ", urlParams)
-        //  ust get the ?v= querystring value!
+        const urlParams = new URLSearchParams(new URL(url).search)
+        console.log("URL Params: ", urlParams)
+        //  just get the ?v= querystring value!
 
         //setTrailerUrl(urlParams.get("v"))
         //setTrailerUrl(url)
@@ -42,8 +42,14 @@ function DetailsScreen({route, navigation}) {
 
         <WebView
             style={ styles.WebViewContainer }
-            //javaScriptEnabled={true}
-            //domStorageEnabled={true}
+            mediaPlaybackRequiresUserAction={true}
+            allowsInlineMediaPlayback={true}
+            allowsFullscreenVideo={false}
+            javaScriptEnabled={true}
+            // domStorageEnabled={true}
+            injectedJavaScript={`
+                document.getElementsByTagName("video")[0].removeAttribute("autoplay"); // this one was the key for me!
+            `}
             source={{uri: trailerUrl+'&autoplay=0'}}
         />
 
@@ -99,8 +105,8 @@ function DetailsScreen({route, navigation}) {
     },
     WebViewContainer: {
         marginTop: (Platform.OS == 'android') ? 20 : 10,   
-        height: 285, 
-        marginTop: 150,
+        height: 485, 
+        marginTop: 100,
       },
     poster: {
         backgroundColor: '#000',
@@ -128,9 +134,22 @@ function DetailsScreen({route, navigation}) {
         marginLeft: 10,
         padding: 0,
         marginTop: 25,
-        marginBottom: 15,
+        marginBottom: 1,
         color: 'white',
         zIndex: 2 
+    },
+    overview: {
+        //fontFamily: 'Roboto-Black',  <-- External font 
+        // List of all internal ios fonts for react-native  
+        // https://github.com/react-native-training/react-native-fonts/blob/master/IosFonts.js
+        position: 'absolute',
+        fontFamily: 'Verdana-Bold',
+        fontSize: 14,
+        marginLeft: 10,
+        padding: 0,
+        marginTop: 600,
+        marginBottom: 15,
+        color: 'white',
     },
     id: {
         //fontFamily: 'Roboto-Black',  <-- External font 
@@ -142,20 +161,6 @@ function DetailsScreen({route, navigation}) {
         marginLeft: 10,
         padding: 0,
         marginTop: 175,
-        marginBottom: 15,
-        color: 'white',
-
-    },
-    overview: {
-        //fontFamily: 'Roboto-Black',  <-- External font 
-        // List of all internal ios fonts for react-native  
-        // https://github.com/react-native-training/react-native-fonts/blob/master/IosFonts.js
-        position: 'absolute',
-        fontFamily: 'Verdana-Bold',
-        fontSize: 18,
-        marginLeft: 10,
-        padding: 0,
-        marginTop: 450,
         marginBottom: 15,
         color: 'white',
 
