@@ -5,11 +5,13 @@ import { TouchableOpacity, Button, StyleSheet, View, Image, Text } from 'react-n
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Landing from './Landing'
-import API from './data-api'
+import Guardian from './data-api'
+import API from './mediastack-news-data-api'
 import DetailsScreen from './Details'
 import WebView from 'react-native-webview'
 
 function HomeScreen({ navigation }) {
+  
     return (
         
       <View style={{ flex: 1 }}>
@@ -20,6 +22,7 @@ function HomeScreen({ navigation }) {
                     source={{uri: 'https://netflix-clone-5b9eb.web.app/' }}
         />
       </View>
+
     );
   }
 
@@ -52,7 +55,7 @@ function HomeScreen({ navigation }) {
           <Stack.Screen 
           name="Landing" 
           component={Landing}
-          options={{ title: 'ChrisFlix',
+          options={{ title: 'Home',
           headerTitle: props => <HeaderTitle {...props} />,
           headerStyle: { backgroundColor: '#000'},
           headerTintColor: '#fff',
@@ -72,7 +75,12 @@ function HomeScreen({ navigation }) {
           <Stack.Screen 
           name="API" 
           component={API} 
-          options={{ title: 'API DATA' }}
+          options={{ title: 'MediaStack News' }}
+          />
+          <Stack.Screen 
+          name="Guardian" 
+          component={Guardian} 
+          options={{ title: 'The Guardian' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

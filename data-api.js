@@ -5,14 +5,16 @@ import axios from './axios';
 const base_url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=Spinal%20Tap&type=trailer&key=AIzaSyBOb-HeB2dOb3CadR3N9dOlNzuNp3VMlu4"
 const query_urlZZ = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=Spinal%20Tap&type=trailer&key=AIzaSyBOb-HeB2dOb3CadR3N9dOlNzuNp3VMlu4"
 const APIKEY = 'AIzaSyBOb-HeB2dOb3CadR3N9dOlNzuNp3VMlu4'
-const query_url = 'https://content.guardianapis.com/search?api-key=04509637-9231-418c-b242-e4fb6912afd1'
+const query_url = 'https://content.guardianapis.com/search?api-key=04509637-9231-418c-b242-e4fb6912afd1&show-fields=thumbnail&page-size=10'
 const guardian_APIKEY = '04509637-9231-418c-b242-e4fb6912afd1'
 
-function API({ navigation }) {
+/// Add this to get thumbnals!  &show-fields=thumbnail
+
+function Guardian({ navigation }) {
     
     const [apiResponse, setResponseData] = useState([]);
 
-    console.log("Entered Data API Function:")
+    console.log("Entered Guardian Data API Function:")
     
     // A snippet of code that runs under a specific conditional variable
     useEffect(() => {
@@ -33,12 +35,12 @@ function API({ navigation }) {
             //console.log("PageInfo: ", request.data.pageInfo)
             //console.log("Item: ", request.data.items[1].kind)
             console.log("Status:", request.status)
-            console.log("Request:", request)
+            //console.log("Request:", request)
             //console.log("Headers:", request.headers)
             console.log("Status:", request.data.response.status)
             console.log("Example Data Item:", request.data.response.results[1].webTitle)
+            console.log("Thumbnail:", request.data.response.results[1].fields.thumbnail)
             // return request;
-           
         }
 
         fetchData();
@@ -50,22 +52,42 @@ function API({ navigation }) {
     return (
         <View >
 
-            <Text>Guardian News API</Text>
-            <Text>-------------------</Text>
-            <Text> </Text>
+            <ScrollView 
+            vertical={true}
+            showsVerticalScrollIndicator={false} 
+            > 
+                {apiResponse.map( (apiData, index) => (
 
-            <ScrollView>
+                <View key={index} style={styles.container}>
+                    
+                <TouchableHighlight
+                activeOpacity={0.6}
+                underlayColor="#111000"
+                onPress={ ()=>{Linking.openURL(apiData.webUrl)}}
+                >  
+           
+                <Image 
+                style={styles.image}
+                source={{
+                // Use ternary operator to check for undefined!
+                // 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+                uri: apiData.fields === undefined ? 'https://logos-download.com/wp-content/uploads/2016/05/The_Guardian_logo_blue-700x123.jpg' : apiData.fields.thumbnail,
+                cache: 'force-cache'
+                    }
+                }   
+                />
 
-                {apiResponse.map(apiData => (
+                </TouchableHighlight>
 
-                    <View>
-                        <Text> {apiData.sectionName}{"\n"}</Text>                 
-                        <Text> {apiData.webTitle}{"\n"} </Text> 
-                        <Text> {apiData.webPublicationDate}</Text> 
-                        <Button 
-                            title="Click me" 
-                            onPress={ ()=>{Linking.openURL(apiData.webUrl)}} 
-                        />
+                        <Text style={styles.title}> 
+                        Catergory: {apiData.sectionName}{"\n"}                
+                        {apiData.webTitle}{"\n"} 
+                        {apiData.webPublicationDate}
+                        </Text>
+
+                        {/* <Text>{JSON.stringify(apiData.fields)}</Text> */}
+                        {/* <Text>{apiData.fields === undefined ? "****Undefined*****" : "OK"}</Text> */}
+                       
                     </View>
                 )) 
                 } 
@@ -76,42 +98,45 @@ function API({ navigation }) {
     )
 }
 
-export default API
+export default Guardian
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    safestyle: {
-      flex: 1,
-      backgroundColor: '#fff',
-    },
-    tinyLogo: {
-        width: 50,
-        height: 50,
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+        alignItems: 'stretch',
       },
+      image: {
+        flex: 1,
+        resizeMode: 'contain',
+        marginLeft: 0,
+        marginRight: 0,
+        marginBottom: 0,
+        marginTop: 1,
+        width: 424,
+        height: 256,
+        alignItems: 'stretch',
+        },
    logo: {
         marginLeft: 1,
         width: 196,
         height: 98,
       },
-    title: {
-        //fontFamily: 'Roboto-Black',  <-- External font 
-        // List of all internal ios fonts for react-native  
-        // https://github.com/react-native-training/react-native-fonts/blob/master/IosFonts.js
-
-        fontFamily: 'Verdana-Bold',
-        fontSize: 20,
-        backgroundColor: '#000',
-        marginLeft: 1,
-        padding: 0,
-        marginTop: 15,
-        marginBottom: 15,
-        color: '#fff',
-    },
+      title: {
+        fontFamily: 'Verdana',
+          fontSize: 18,
+          backgroundColor: '#fff',
+          width: 400,
+          height: 120,
+          marginLeft: 10,
+          marginRight: 0,
+          padding: 0,
+          marginTop: 8,
+          marginBottom: 1,
+          color: '#000',
+      },
     row: {
         marginLeft: 20,
         color: '#fff',

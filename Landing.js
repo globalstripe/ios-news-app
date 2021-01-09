@@ -74,12 +74,16 @@ const Landing = ({ navigation }) => {
 
     </ScrollView>
         <Button
-        title="Home"
+        title="WebView"
         onPress={() => navigation.navigate('Home')}
         />
         <Button
-        title="API DATA"
+        title="MediaStack"
         onPress={() => navigation.navigate('API')}
+        />
+        <Button
+        title="Guardian"
+        onPress={() => navigation.navigate('Guardian')}
         />
     </SafeAreaView>
 
