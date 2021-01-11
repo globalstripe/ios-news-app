@@ -82,8 +82,8 @@ export default class MyCarousel extends React.Component {
 
     render() {
         return (
-          <SafeAreaView style={{flex: 1, backgroundColor:'#000', paddingTop: 150, }}>
-            <View style={{ flex: 1, flexDirection:'row', justifyContent: 'center', color:'black'}}>
+          <SafeAreaView style={{flex: 1, backgroundColor:'#000', paddingTop: 0, }}>
+            <View style={{ paddingTop: 0,flex: 1, flexDirection:'row', justifyContent: 'center', color:'black'}}>
                 <Carousel
                   layout={"stack"}
                   ref={ref => this.carousel = ref}

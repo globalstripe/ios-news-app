@@ -53,9 +53,10 @@ const Landing = ({ navigation }) => {
         <Text style={styles.text}>Carousel</Text>
        */}
 
-      <ScrollView>
-      <MyCarousel></MyCarousel>
-      <View style={{flex: 1,}}>
+      <ScrollView styles={{backgroundColor: 'black'}}>
+
+      <MyCarousel style={{backgroundColor: 'black' }}></MyCarousel>
+      <View style={{flex: 1,backgroundColor: 'black' }}>
    
       <Row title="Netflix Originals" fetchUrl={requests.fetchNetFlixOriginals} nav={navigation}  />
       <Row title="Trending Now" fetchUrl={requests.fetchTrendingNow} nav={navigation}  />
@@ -74,6 +75,10 @@ const Landing = ({ navigation }) => {
 
     </ScrollView>
         <Button
+        title="Menu"
+        onPress={() => navigation.openDrawer()}
+        />
+        {/* <Button
         title="WebView"
         onPress={() => navigation.navigate('Home')}
         />
@@ -85,6 +90,10 @@ const Landing = ({ navigation }) => {
         title="Guardian"
         onPress={() => navigation.navigate('Guardian')}
         />
+        <Button
+        title="Settings"
+        onPress={() => navigation.navigate('Settings')}
+        /> */}
     </SafeAreaView>
 
   );

@@ -5,7 +5,7 @@ import axios from './axios';
 const base_url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=Spinal%20Tap&type=trailer&key=AIzaSyBOb-HeB2dOb3CadR3N9dOlNzuNp3VMlu4"
 const query_urlZZ = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=Spinal%20Tap&type=trailer&key=AIzaSyBOb-HeB2dOb3CadR3N9dOlNzuNp3VMlu4"
 const APIKEY = 'AIzaSyBOb-HeB2dOb3CadR3N9dOlNzuNp3VMlu4'
-const query_url = 'https://content.guardianapis.com/search?api-key=04509637-9231-418c-b242-e4fb6912afd1&show-fields=thumbnail&page-size=10'
+const query_url = 'https://content.guardianapis.com/search?api-key=04509637-9231-418c-b242-e4fb6912afd1&show-fields=thumbnail&page-size=20'
 const guardian_APIKEY = '04509637-9231-418c-b242-e4fb6912afd1'
 
 /// Add this to get thumbnals!  &show-fields=thumbnail
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         marginRight: 0,
         marginBottom: 0,
         marginTop: 1,
-        width: 424,
+        width: 428,
         height: 256,
         alignItems: 'stretch',
         },

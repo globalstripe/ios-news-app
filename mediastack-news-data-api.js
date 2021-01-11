@@ -123,27 +123,25 @@ function API({ navigation }) {
 export default API
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
       flex: 1,
       flexDirection: 'column',
       justifyContent: 'center',
       backgroundColor: '#fff',
       alignItems: 'stretch',
     },
-
-   image: {
+  image: {
     flex: 1,
     resizeMode: 'contain',
     marginLeft: 0,
     marginRight: 0,
     marginBottom: 0,
     marginTop: 1,
-    width: 434,
+    width: 428,
     height: 244,
     alignItems: 'stretch',
     },
-
-    title: {
+  title: {
       fontFamily: 'Verdana',
         fontSize: 18,
         backgroundColor: '#fff',
@@ -164,7 +162,7 @@ const styles = StyleSheet.create({
         display: 'flex',
     },
     poster: {
-      backgroundColor: '#fa0',
+      backgroundColor: '#000',
       flex: 1,
       marginTop: 55,
       marginLeft: 1,
